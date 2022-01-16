@@ -1,0 +1,12 @@
+gunicorn
+click
+colorama
+Flask
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+passlib
+pybase64
+pysqlite3
+requests
