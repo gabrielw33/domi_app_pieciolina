@@ -17,6 +17,11 @@
 
 <body>
 	<h1>{{user}}</h1>
+	<form role="form" method="POST" id = f1 >
+		<button id="return" name="return" type="submit" >Strona główna</button>
+	</form>
+
+
   <div class="main">
     <div class="editor"></div>
 
@@ -240,52 +245,51 @@
 		});
 	
 		$('#btnLoad').click(function() 
-		{
-			var file = document.getElementById("fileLoader").files[0];
-			var fileread = new FileReader();
-			fileread.onload = function(e) {
-				var content = e.target.result;
-				var composition = JSON.parse(content);  
-				editor.func('importFromJSONString', composition);
-				
-				// Reset input form and button states
-				document.getElementById('fileLoader').value= null;
-				var button = document.getElementById("btnLoad");
-				button.disabled = true;
-			};
-			fileread.readAsText(file);
-	
-		});
-
-
-		//Disable button "btnLoad" when no file is selected
-		document.getElementById("fileLoader").addEventListener("change", function() 
-		{
+	{
+		var file = document.getElementById("fileLoader").files[0];
+		var fileread = new FileReader();
+		fileread.onload = function(e) {
+			var content = e.target.result;
+			var composition = JSON.parse(content);  
+			editor.func('importFromJSONString', composition);
+			
+			// Reset input form and button states
+			document.getElementById('fileLoader').value= null;
 			var button = document.getElementById("btnLoad");
-			button.disabled = false;
-		});
-
+			button.disabled = true;
+		};
+		fileread.readAsText(file);
+  
+	});
+	
+	//Disable button "btnLoad" when no file is selected
+	document.getElementById("fileLoader").addEventListener("change", function() 
+	{
+		var button = document.getElementById("btnLoad");
+		button.disabled = false;
 	});
 
-		//Tempo value validation
-		function validateInputTempo(){
-			var tempoValue = document.getElementById("quantity").value;
-			if(isNaN(tempoValue)){
-				alert(tempoValue + " nie jest liczbą. Przywracam podstawową wartość 60.");
-				document.getElementById("quantity").value=60;
-			}
-			if(tempoValue<=0)
-			{
-				alert("Tempo musi być nieujemne. Przywracam do wartości 30.");
-				document.getElementById("quantity").value=30;
-			}
-			if(tempoValue>200)
-			{
-				alert("Może tak się nie zapędzajmy z tym tempem? Ustawię 150");
-				document.getElementById("quantity").value=150;
-			}
+});
 
+	//Tempo value validation
+	function validateInputTempo(){
+		var tempoValue = document.getElementById("quantity").value;
+		if(isNaN(tempoValue)){
+			alert(tempoValue + " nie jest liczbą. Przywracam podstawową wartość 60.");
+			document.getElementById("quantity").value=60;
 		}
+		if(tempoValue<=0)
+		{
+			alert("Tempo musi być nieujemne. Przywracam do wartości 30.");
+			document.getElementById("quantity").value=30;
+		}
+		if(tempoValue>200)
+		{
+			alert("Może tak się nie zapędzajmy z tym tempem? Ustawię 150");
+			document.getElementById("quantity").value=150;
+		}
+
+	}
 	</script>
 
 </body>

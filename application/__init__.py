@@ -161,7 +161,9 @@ def login():
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+
     
+    print(request.referrer)
     
     
     if 'logged' in session and session['logged']:
@@ -190,7 +192,8 @@ def index():
                 name = request.form['r_filename']
                 flash_message = "True"
                 session['melody_content'] = Markup(load_file(name))
-                
+            elif  list(request.form.keys())[0] == 'return':
+                return redirect(url_for('strona'))
     except :
         pass
     return render_template('index.html', len = files, melody_content = session['melody_content'] , flash_message=flash_message, user=user )
